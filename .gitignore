@@ -1,3 +1,5 @@
 .idea
 project
 target
+infrastructure/.terraform
+infrastructure/terraform.tfstate

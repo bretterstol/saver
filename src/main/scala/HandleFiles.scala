@@ -2,14 +2,12 @@ import java.io.File
 
 object HandleFiles {
 
-  private def createFile(file: File) = dirFile(file.getPath, file)
 
   def getFiles(file: File) = {
       if(file.isDirectory) file
         .listFiles(_.isFile)
         .toList
-        .map(f => createFile(f))
-      else if (file.isFile) List(createFile(file))
+      else if (file.isFile) List(file)
       else List()
   }
 
@@ -26,10 +24,9 @@ object HandleFiles {
       files <- getFiles(dirs)
     } yield files
 
-  def getAllFiles(name: String):List[dirFile] = {
+  def getAllFiles(name: String):List[File] = {
     val file = new File(name)
     getFiles(file) ++ getSub(file)
   }
 }
 
-case class dirFile (path: String, file: File)
